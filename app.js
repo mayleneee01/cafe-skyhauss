@@ -898,42 +898,26 @@ function renderAdminDashboard() {
 
   content.innerHTML = `
     <!-- STICKY TOP HEADER -->
-    <div class="sticky top-0 bg-white z-[60] pb-2.5 border-b border-gray-100 mb-3 pt-1">
-      <div class="flex justify-between items-center mb-2.5">
+    <div class="sticky top-0 bg-white z-[60] pb-3 border-b border-gray-100 mb-4 pt-1">
+      <div class="flex justify-between items-center mb-3">
         <div>
-          <h2 class="text-lg md:text-3xl font-bold text-gray-900 font-syne flex items-center gap-2">
+          <h2 class="text-xl md:text-3xl font-black text-gray-900 font-syne flex items-center gap-2">
             <span>SKY HAUS Manager</span>
-            <span class="text-[9px] bg-maroon text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-mono">LIVE</span>
+            <span class="text-[10px] bg-maroon text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-mono">LIVE</span>
           </h2>
         </div>
-        <div class="flex items-center gap-1.5 sm:gap-3">
-          <button onclick="logoutAdmin()" class="cursor-pointer active:scale-95 px-3.5 py-2 bg-gray-100 text-gray-800 hover:bg-maroon hover:text-white text-[11px] font-bold uppercase rounded-xl transition-all font-syne shadow-2xs flex items-center gap-1">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button onclick="logoutAdmin()" class="cursor-pointer active:scale-95 px-4 py-2 bg-gray-100 text-gray-800 hover:bg-maroon hover:text-white text-xs font-bold uppercase rounded-xl transition-all font-syne shadow-2xs flex items-center gap-1">
             <span>Logout</span>
           </button>
-          <button onclick="closeModal()" class="cursor-pointer active:scale-95 p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+          <button onclick="closeModal()" class="cursor-pointer active:scale-95 p-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl transition-all flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
-        </div>
-      </div>
-
-      <!-- Ultra-Compact Analytics Single Bar for Mobile -->
-      <div class="flex items-center justify-between gap-1.5 py-1.5 px-3 bg-gray-50 rounded-xl mb-3 text-center border border-gray-100 font-sans shadow-2xs overflow-x-auto whitespace-nowrap">
-        <div class="flex items-center gap-1.5 text-[11px]">
-          <span class="font-bold text-gray-500 uppercase tracking-tight">Total Orders:</span>
-          <span class="font-black text-gray-900 font-mono bg-white px-2 py-0.5 rounded shadow-2xs border border-gray-200">${totalOrders}</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-[11px]">
-          <span class="font-bold text-yellow-600 uppercase tracking-tight">Pending:</span>
-          <span class="font-black text-yellow-800 font-mono bg-yellow-100 px-2 py-0.5 rounded shadow-2xs border border-yellow-200">${pendingOrders}</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-[11px]">
-          <span class="font-bold text-green-600 uppercase tracking-tight">Verified:</span>
-          <span class="font-black text-green-800 font-mono bg-green-100 px-2 py-0.5 rounded shadow-2xs border border-green-200">${completedOrders}</span>
         </div>
       </div>
 
       <!-- Dashboard Navigation Tabs -->
-      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap flex-nowrap font-syne max-w-full pb-1">
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap flex-nowrap font-syne max-w-full pt-1">
         <button onclick="switchAdminTab('orders')" class="cursor-pointer active:scale-95 flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'orders' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
           Orders (${orders.length})
         </button>
