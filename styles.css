@@ -705,7 +705,6 @@ footer {
 .animate-modal {
   animation: modal-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   overscroll-behavior: contain !important;
-  touch-action: pan-y !important;
 }
 
 @keyframes pulse-glow {

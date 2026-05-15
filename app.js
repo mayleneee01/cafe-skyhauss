@@ -374,8 +374,8 @@ function renderCheckoutModal() {
   modalBox.innerHTML = `
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 font-syne">Order Summary</h2>
-      <button onclick="closeModal()" class="text-gray-400 hover:text-maroon transition-colors p-1">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <button onclick="closeModal()" class="cursor-pointer active:scale-95 p-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
     </div>
 
@@ -448,9 +448,13 @@ function renderQrisModal() {
   const allItemNames = [selectedMainItem.name, ...currentComboItems.map(c => c.name)].join(', ');
 
   modalBox.innerHTML = `
-    <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors p-1">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <button onclick="closeModal()" class="cursor-pointer active:scale-95 absolute top-5 right-5 p-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all z-50 flex items-center justify-center shadow-2xs">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
+    
+    <div class="w-16 h-16 bg-[#C4920A]/10 text-[#C4920A] rounded-2xl flex items-center justify-center mb-4 shadow-inner">
+       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+    </div>
 
     <h2 class="text-2xl font-bold text-gray-900 font-syne mb-1">Scan QRIS to Pay</h2>
     <p class="text-xs text-maroon font-semibold uppercase tracking-wider mb-6">Verified Direct Payment</p>
@@ -617,8 +621,8 @@ function openOrderStatusModal() {
         <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Status Pesanan Saya</h2>
         <p class="text-xs text-maroon font-semibold uppercase tracking-widest mt-1">Real-Time Order Tracking</p>
       </div>
-      <button onclick="closeModal()" class="text-gray-400 hover:text-gray-900 transition-colors p-1">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <button onclick="closeModal()" class="cursor-pointer active:scale-95 p-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
     </div>
     <p class="text-xs text-gray-500 mb-2 font-light text-left">Daftar riwayat pesanan dari perangkat ini beserta status verifikasi pembayaran.</p>
@@ -732,8 +736,8 @@ function renderAdminAuthScreen() {
   const content = document.getElementById('admin-modal-content');
   if (!content) return;
   content.innerHTML = `
-    <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors p-1">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <button onclick="closeModal()" class="cursor-pointer active:scale-95 absolute top-5 right-5 p-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all z-50 flex items-center justify-center shadow-2xs">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
     <div class="max-w-sm mx-auto text-center py-8">
       <div class="w-16 h-16 bg-maroon/10 rounded-2xl flex items-center justify-center text-maroon mx-auto mb-6 shadow-inner">
@@ -894,49 +898,49 @@ function renderAdminDashboard() {
 
   content.innerHTML = `
     <!-- STICKY TOP HEADER -->
-    <div class="sticky top-0 bg-white z-20 pb-3 border-b border-gray-100 mb-4 pt-1">
-      <div class="flex justify-between items-center mb-3">
+    <div class="sticky top-0 bg-white z-[60] pb-2.5 border-b border-gray-100 mb-3 pt-1">
+      <div class="flex justify-between items-center mb-2.5">
         <div>
-          <h2 class="text-xl md:text-3xl font-bold text-gray-900 font-syne flex items-center gap-2">
+          <h2 class="text-lg md:text-3xl font-bold text-gray-900 font-syne flex items-center gap-2">
             <span>SKY HAUS Manager</span>
-            <span class="text-[10px] bg-maroon text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-mono">LIVE</span>
+            <span class="text-[9px] bg-maroon text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-mono">LIVE</span>
           </h2>
         </div>
-        <div class="flex items-center gap-2 sm:gap-4">
-          <button onclick="logoutAdmin()" class="px-3.5 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 text-[11px] font-bold uppercase rounded-xl transition-colors font-syne shadow-sm">
-            Logout
+        <div class="flex items-center gap-1.5 sm:gap-3">
+          <button onclick="logoutAdmin()" class="cursor-pointer active:scale-95 px-3.5 py-2 bg-gray-100 text-gray-800 hover:bg-maroon hover:text-white text-[11px] font-bold uppercase rounded-xl transition-all font-syne shadow-2xs flex items-center gap-1">
+            <span>Logout</span>
           </button>
-          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-900 transition-colors p-1 flex-shrink-0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          <button onclick="closeModal()" class="cursor-pointer active:scale-95 p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl transition-all flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
       </div>
 
-      <!-- Analytics Mini Row for Mobile/Desktop -->
-      <div class="grid grid-cols-3 gap-2 py-2 px-3 bg-gray-50 rounded-xl mb-3 text-center border border-gray-100 font-sans">
-        <div>
-          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Total Orders</span>
-          <span class="text-lg font-black text-gray-900 font-syne leading-none">${totalOrders}</span>
+      <!-- Ultra-Compact Analytics Single Bar for Mobile -->
+      <div class="flex items-center justify-between gap-1.5 py-1.5 px-3 bg-gray-50 rounded-xl mb-3 text-center border border-gray-100 font-sans shadow-2xs overflow-x-auto whitespace-nowrap">
+        <div class="flex items-center gap-1.5 text-[11px]">
+          <span class="font-bold text-gray-500 uppercase tracking-tight">Total Orders:</span>
+          <span class="font-black text-gray-900 font-mono bg-white px-2 py-0.5 rounded shadow-2xs border border-gray-200">${totalOrders}</span>
         </div>
-        <div>
-          <span class="text-[10px] font-bold text-yellow-600 uppercase tracking-wider block">Pending</span>
-          <span class="text-lg font-black text-yellow-600 font-syne leading-none">${pendingOrders}</span>
+        <div class="flex items-center gap-1.5 text-[11px]">
+          <span class="font-bold text-yellow-600 uppercase tracking-tight">Pending:</span>
+          <span class="font-black text-yellow-800 font-mono bg-yellow-100 px-2 py-0.5 rounded shadow-2xs border border-yellow-200">${pendingOrders}</span>
         </div>
-        <div>
-          <span class="text-[10px] font-bold text-green-600 uppercase tracking-wider block">Selesai</span>
-          <span class="text-lg font-black text-green-600 font-syne leading-none">${completedOrders}</span>
+        <div class="flex items-center gap-1.5 text-[11px]">
+          <span class="font-bold text-green-600 uppercase tracking-tight">Verified:</span>
+          <span class="font-black text-green-800 font-mono bg-green-100 px-2 py-0.5 rounded shadow-2xs border border-green-200">${completedOrders}</span>
         </div>
       </div>
 
       <!-- Dashboard Navigation Tabs -->
       <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap flex-nowrap font-syne max-w-full pb-1">
-        <button onclick="switchAdminTab('orders')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'orders' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+        <button onclick="switchAdminTab('orders')" class="cursor-pointer active:scale-95 flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'orders' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
           Orders (${orders.length})
         </button>
-        <button onclick="switchAdminTab('reservations')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'reservations' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+        <button onclick="switchAdminTab('reservations')" class="cursor-pointer active:scale-95 flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'reservations' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
           Reservations (${reservations.length})
         </button>
-        <button onclick="switchAdminTab('menu')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'menu' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+        <button onclick="switchAdminTab('menu')" class="cursor-pointer active:scale-95 flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'menu' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
           Menu Catalog (32)
         </button>
       </div>
