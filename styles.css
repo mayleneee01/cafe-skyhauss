@@ -718,6 +718,7 @@ footer {
 /* RESPONSIVE */
 @media (max-width: 900px) {
   #hero { grid-template-columns: 1fr; min-height: auto; }
+  #hero::after { display: none !important; }
   .hero-right { display: none; }
   .hero-left { padding: 8rem 6vw 5rem; }
   #about { grid-template-columns: 1fr; gap: 3.5rem; }

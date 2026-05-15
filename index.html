@@ -26,7 +26,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Bebas+Neue&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2.0.5">
+  <link rel="stylesheet" href="styles.css?v=2.0.9">
 </head>
 <body class="bg-off-white text-gray-900 overflow-x-hidden max-w-[100vw] w-full relative font-outfit">
 
@@ -690,7 +690,7 @@
   </div>
   <div class="foot-bottom">
     <p>© 2026 Sky Haus Cafe. All rights reserved.</p>
-    <p>Made with ☕ in Bandar Lampung</p>
+    <p>Made with love in Bandar Lampung</p>
   </div>
 </footer>
 
@@ -698,21 +698,21 @@
 
 <!-- Checkout & Pairing Modal Overlay -->
 <div id="modal-overlay" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity animate-fade-in font-sans">
-  <div id="checkout-modal-content" class="relative w-full max-w-xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto animate-modal text-gray-900">
+  <div id="checkout-modal-content" class="relative w-full max-w-xl bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto animate-modal text-gray-900">
     <!-- Dynamic Content Rendered by app.js -->
   </div>
 </div>
 
 <!-- QRIS Payment Modal Overlay -->
 <div id="qris-overlay" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity animate-fade-in font-sans">
-  <div id="qris-modal-content" class="relative bg-white w-full max-w-sm rounded-[2.5rem] p-8 flex flex-col items-center text-center animate-modal shadow-2xl border border-gray-100 text-gray-900">
+  <div id="qris-modal-content" class="relative bg-white w-full max-w-sm rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 flex flex-col items-center text-center animate-modal shadow-2xl border border-gray-100 text-gray-900">
     <!-- Dynamic Content Rendered by app.js -->
   </div>
 </div>
 
 <!-- Reservation Modal Overlay -->
 <div id="reservation-overlay" class="hidden fixed inset-0 z-[75] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
-  <div id="reservation-modal-content" class="relative w-full max-w-md bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden animate-modal border border-gray-100 text-gray-900">
+  <div id="reservation-modal-content" class="relative w-full max-w-md bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden animate-modal border border-gray-100 text-gray-900">
     <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors p-1">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
@@ -751,7 +751,7 @@
 
 <!-- Admin Portal Overlay -->
 <div id="admin-overlay" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
-  <div id="admin-modal-content" class="relative w-full max-w-4xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
+  <div id="admin-modal-content" class="relative w-full max-w-4xl bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
     <!-- Dynamic Content Rendered by app.js -->
   </div>
 </div>
@@ -781,14 +781,14 @@
 
 <!-- Order Status Checker Overlay -->
 <div id="status-overlay" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
-  <div id="status-modal-content" class="relative w-full max-w-xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
+  <div id="status-modal-content" class="relative w-full max-w-xl bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
     <!-- Dynamic Content Rendered by app.js -->
   </div>
 </div>
 
 <!-- Payment Proof Viewer Overlay -->
 <div id="proof-overlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity animate-fade-in font-sans" onclick="closeProofModal()">
-  <div class="relative max-w-2xl w-full bg-white rounded-[2.5rem] p-6 md:p-8 shadow-2xl overflow-hidden flex flex-col items-center animate-modal border border-gray-100" onclick="event.stopPropagation()">
+  <div class="relative max-w-2xl w-full bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 sm:p-8 shadow-2xl overflow-hidden flex flex-col items-center animate-modal border border-gray-100" onclick="event.stopPropagation()">
     <div class="flex justify-between items-center w-full mb-4 border-b border-gray-100 pb-4 text-left">
       <div>
         <h3 class="text-2xl font-bold font-syne text-gray-900 mb-1">Bukti Pembayaran QRIS</h3>
@@ -805,6 +805,6 @@
   </div>
 </div>
 
-<script src="app.js"></script>
+<script src="app.js?v=2.0.9"></script>
 </body>
 </html>
