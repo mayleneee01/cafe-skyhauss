@@ -13,9 +13,11 @@ let isAdminLoggedIn = false;
 let adminActiveTab = 'orders';
 
 // --- Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
   initApp();
-});
+}
 
 function initApp() {
   initParticles();
@@ -27,18 +29,23 @@ function initApp() {
   setupScrollReveal();
   setupModalListeners();
 
-  // Intro Animation Sequence
+  // Intro Animation Sequence & Click-to-Skip
+  const intro = document.getElementById('intro');
+  if (intro) {
+    intro.addEventListener('click', dismissIntro);
+    setTimeout(dismissIntro, 2000);
+  }
+}
+
+function dismissIntro() {
+  const intro = document.getElementById('intro');
+  if (!intro || intro.classList.contains('gone')) return;
+  intro.classList.add('reveal');
   setTimeout(() => {
-    const intro = document.getElementById('intro');
-    if (intro) {
-      intro.classList.add('reveal');
-      setTimeout(() => {
-        intro.classList.add('gone');
-        document.body.style.overflow = 'auto';
-        document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('vis'));
-      }, 1500);
-    }
-  }, 2400);
+    intro.classList.add('gone');
+    document.body.style.overflow = 'auto';
+    document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('vis'));
+  }, 1200);
 }
 
 // --- DOM Visual Effects & Sidebar ---
