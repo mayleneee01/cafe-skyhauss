@@ -11,6 +11,7 @@ let currentProofDataUrl = '';
 
 let isAdminLoggedIn = false;
 let adminActiveTab = 'orders';
+let adminSearchQuery = '';
 
 // --- Initialization ---
 if (document.readyState === 'loading') {
@@ -786,9 +787,17 @@ function renderAdminDashboard() {
           <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider font-syne">Customer Orders (${orders.length})</h4>
           <span class="text-xs px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full font-bold">${pendingOrders} Menunggu Verifikasi</span>
         </div>
+        
+        <div class="mb-4">
+          <div class="relative flex items-center">
+            <input type="text" id="admin-search-input" value="${adminSearchQuery}" oninput="handleAdminSearch(event)" placeholder="🔍 Cari ID pesanan, nama pelanggan, atau item menu..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-900 outline-none focus:ring-2 focus:ring-maroon font-medium transition-all shadow-sm" />
+            <button id="admin-search-clear" onclick="clearAdminSearch()" class="absolute right-3.5 text-xs bg-gray-200 text-gray-600 hover:bg-maroon hover:text-white rounded-full w-5 h-5 flex items-center justify-center transition-colors font-bold" style="${adminSearchQuery ? '' : 'display: none'}">✕</button>
+          </div>
+        </div>
+
         <div class="space-y-3">
           ${orders.map(o => `
-            <div class="p-4 bg-off-white rounded-2xl border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all hover:border-maroon/30 text-left shadow-sm">
+            <div class="admin-order-card p-4 bg-off-white rounded-2xl border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all hover:border-maroon/30 text-left shadow-sm">
               <div class="w-full">
                 <div class="flex flex-wrap items-center gap-2 mb-1.5 font-syne">
                   <span class="text-xs font-bold text-gray-900 font-mono bg-white px-2 py-0.5 rounded border border-gray-200">${o.id}</span>
@@ -855,9 +864,17 @@ function renderAdminDashboard() {
           <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider font-syne">Menu Catalog Inventory</h4>
           <span class="text-xs text-gray-500 font-light">32 Total Items</span>
         </div>
+
+        <div class="mb-4">
+          <div class="relative flex items-center">
+            <input type="text" id="admin-search-input" value="${adminSearchQuery}" oninput="handleAdminSearch(event)" placeholder="🔍 Cari nama menu, kategori, atau harga..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-900 outline-none focus:ring-2 focus:ring-maroon font-medium transition-all shadow-sm" />
+            <button id="admin-search-clear" onclick="clearAdminSearch()" class="absolute right-3.5 text-xs bg-gray-200 text-gray-600 hover:bg-maroon hover:text-white rounded-full w-5 h-5 flex items-center justify-center transition-colors font-bold" style="${adminSearchQuery ? '' : 'display: none'}">✕</button>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           ${ALL_MENU_ITEMS.map(item => `
-            <div class="p-3 bg-off-white rounded-2xl border border-gray-200 flex items-center justify-between gap-3 text-left shadow-sm">
+            <div class="admin-menu-card p-3 bg-off-white rounded-2xl border border-gray-200 flex items-center justify-between gap-3 text-left shadow-sm">
               <div class="flex items-center gap-3 min-w-0">
                 <div class="w-10 h-10 bg-white rounded-lg p-1 flex-shrink-0 flex items-center justify-center">
                   <img src="${item.img}" alt="" class="w-full h-full object-contain" onerror="this.src='./public/hero_coffee_splash.png'" />
@@ -876,52 +893,57 @@ function renderAdminDashboard() {
   }
 
   content.innerHTML = `
-    <div class="flex-shrink-0 flex justify-between items-center mb-6 border-b border-gray-100 pb-5 text-left">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 font-syne">SKY HAUS Manager</h2>
-        <p class="text-xs text-maroon font-semibold uppercase tracking-widest mt-1 font-syne">Live Operational Dashboard</p>
+    <!-- STICKY TOP HEADER -->
+    <div class="sticky top-0 bg-white z-20 pb-3 border-b border-gray-100 mb-4 pt-1">
+      <div class="flex justify-between items-center mb-3">
+        <div>
+          <h2 class="text-xl md:text-3xl font-bold text-gray-900 font-syne flex items-center gap-2">
+            <span>SKY HAUS Manager</span>
+            <span class="text-[10px] bg-maroon text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-mono">LIVE</span>
+          </h2>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-4">
+          <button onclick="logoutAdmin()" class="px-3.5 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 text-[11px] font-bold uppercase rounded-xl transition-colors font-syne shadow-sm">
+            Logout
+          </button>
+          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-900 transition-colors p-1 flex-shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
       </div>
-      <div class="flex items-center gap-4">
-        <button onclick="logoutAdmin()" class="px-5 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs font-bold uppercase rounded-xl transition-colors font-syne shadow-sm">
-          Logout
-        </button>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-900 transition-colors p-1 flex-shrink-0">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-    </div>
 
-    <!-- Analytics Cards -->
-    <div class="flex-shrink-0 grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-      <div class="p-4 bg-off-white rounded-2xl border border-gray-200 text-left shadow-sm">
-        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1 font-sans">Total Orders</span>
-        <span class="text-2xl font-black text-gray-900 font-syne">${totalOrders}</span>
+      <!-- Analytics Mini Row for Mobile/Desktop -->
+      <div class="grid grid-cols-3 gap-2 py-2 px-3 bg-gray-50 rounded-xl mb-3 text-center border border-gray-100 font-sans">
+        <div>
+          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Total Orders</span>
+          <span class="text-lg font-black text-gray-900 font-syne leading-none">${totalOrders}</span>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase tracking-wider block">Pending</span>
+          <span class="text-lg font-black text-yellow-600 font-syne leading-none">${pendingOrders}</span>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-green-600 uppercase tracking-wider block">Selesai</span>
+          <span class="text-lg font-black text-green-600 font-syne leading-none">${completedOrders}</span>
+        </div>
       </div>
-      <div class="p-4 bg-off-white rounded-2xl border border-gray-200 text-left shadow-sm">
-        <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest block mb-1 font-sans">Pending Verification</span>
-        <span class="text-2xl font-black text-yellow-600 font-syne">${pendingOrders}</span>
-      </div>
-      <div class="p-4 bg-off-white rounded-2xl border border-gray-200 text-left shadow-sm">
-        <span class="text-xs font-bold text-green-600 uppercase tracking-widest block mb-1 font-sans">Verified Completed</span>
-        <span class="text-2xl font-black text-green-600 font-syne">${completedOrders}</span>
-      </div>
-    </div>
 
-    <!-- Dashboard Navigation Tabs -->
-    <div class="flex-shrink-0 flex items-center gap-2 mb-6 border-b border-gray-200 pb-3 overflow-x-auto whitespace-nowrap flex-nowrap font-syne max-w-full">
-      <button onclick="switchAdminTab('orders')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'orders' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
-        Orders (${orders.length})
-      </button>
-      <button onclick="switchAdminTab('reservations')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'reservations' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
-        Reservations (${reservations.length})
-      </button>
-      <button onclick="switchAdminTab('menu')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'menu' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
-        Menu Catalog (32)
-      </button>
+      <!-- Dashboard Navigation Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap flex-nowrap font-syne max-w-full pb-1">
+        <button onclick="switchAdminTab('orders')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'orders' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+          Orders (${orders.length})
+        </button>
+        <button onclick="switchAdminTab('reservations')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'reservations' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+          Reservations (${reservations.length})
+        </button>
+        <button onclick="switchAdminTab('menu')" class="flex-shrink-0 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${adminActiveTab === 'menu' ? 'bg-maroon text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">
+          Menu Catalog (32)
+        </button>
+      </div>
     </div>
 
     <!-- Active Tab Content -->
-    <div class="flex-grow overflow-y-auto pr-2">
+    <div class="flex-grow overflow-y-auto pr-2 space-y-4">
       ${tabHtml}
     </div>
   `;
@@ -929,7 +951,32 @@ function renderAdminDashboard() {
 
 function switchAdminTab(tab) {
   adminActiveTab = tab;
+  adminSearchQuery = '';
   renderAdminDashboard();
+}
+
+function handleAdminSearch(e) {
+  adminSearchQuery = e.target.value.toLowerCase();
+  if (adminActiveTab === 'orders') {
+    document.querySelectorAll('.admin-order-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(adminSearchQuery) ? '' : 'none';
+    });
+  } else if (adminActiveTab === 'menu') {
+    document.querySelectorAll('.admin-menu-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(adminSearchQuery) ? '' : 'none';
+    });
+  }
+  const clearBtn = document.getElementById('admin-search-clear');
+  if (clearBtn) clearBtn.style.display = adminSearchQuery ? '' : 'none';
+}
+
+function clearAdminSearch() {
+  adminSearchQuery = '';
+  const input = document.getElementById('admin-search-input');
+  if (input) input.value = '';
+  handleAdminSearch({ target: { value: '' } });
 }
 
 function markOrderCompleted(orderId) {
