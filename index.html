@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sky Haus — Premium Cafe Experience</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maroon: '#6B0F1A',
+            'maroon-deep': '#4A0A12',
+            'maroon-light': '#A8253A',
+            gold: '#C4920A',
+            'gold-light': '#E8B840',
+            'off-white': '#FAF7F4',
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Bebas+Neue&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-off-white text-gray-900 overflow-x-hidden font-outfit">
+
+<!-- ══ INTRO ══════════════════════════════════════ -->
+<div id="intro">
+  <!-- Floating particles -->
+  <div class="intro-particles" id="particles"></div>
+
+  <div class="curtain-l"><div class="tear"></div></div>
+  <div class="curtain-r"><div class="tear"></div></div>
+
+  <div class="intro-bean-wrap">
+    <div class="bean-svg-container">
+      <div class="bean-glow"></div>
+      <div class="bean-orbit"></div>
+
+      <!-- Steam above the bean -->
+      <div class="steam">
+        <div class="steam-line"></div>
+        <div class="steam-line"></div>
+        <div class="steam-line"></div>
+      </div>
+
+      <!-- Detailed Coffee Bean SVG -->
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="beanGrad" cx="40%" cy="35%" r="65%">
+            <stop offset="0%"   stop-color="#8B3A00"/>
+            <stop offset="40%"  stop-color="#5C2000"/>
+            <stop offset="100%" stop-color="#2A0D00"/>
+          </radialGradient>
+          <radialGradient id="sheen" cx="30%" cy="25%" r="50%">
+            <stop offset="0%"  stop-color="rgba(255,200,100,0.3)"/>
+            <stop offset="100%" stop-color="rgba(255,200,100,0)"/>
+          </radialGradient>
+          <filter id="beanShadow">
+            <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.6)"/>
+          </filter>
+        </defs>
+
+        <g transform="translate(60,60)" filter="url(#beanShadow)">
+          <ellipse rx="30" ry="44" fill="url(#beanGrad)" transform="rotate(-15)"/>
+          <ellipse rx="30" ry="44" fill="url(#sheen)" transform="rotate(-15)"/>
+          <path d="M-2,-42 C-10,-25 -14,0 -10,18 C-6,32 0,40 2,42" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="3" stroke-linecap="round" transform="rotate(-15)"/>
+          <path d="M-2,-42 C-10,-25 -14,0 -10,18 C-6,32 0,40 2,42" fill="none" stroke="rgba(255,120,30,0.15)" stroke-width="1.5" stroke-linecap="round" transform="rotate(-15)"/>
+          <path d="M8,-30 Q14,-20 12,-8" fill="none" stroke="rgba(255,170,60,0.2)" stroke-width="1.5" stroke-linecap="round" transform="rotate(-15)"/>
+          <path d="M-12,5 Q-8,15 -10,25" fill="none" stroke="rgba(255,170,60,0.15)" stroke-width="1" stroke-linecap="round" transform="rotate(-15)"/>
+        </g>
+        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(196,146,10,0.25)" stroke-width="1" stroke-dasharray="6 4"/>
+      </svg>
+    </div>
+
+    <div class="intro-logo">
+      <h1>SKY HAUS</h1>
+      <span>Premium Cafe · Bandar Lampung</span>
+    </div>
+    <div class="intro-progress">
+      <div class="intro-progress-fill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAVBAR ═════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">SKY<span>HAUS</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#featured">Best Seller</a></li>
+    <li><a href="#testimonials">Ulasan</a></li>
+    <li><a href="#" onclick="openOrderStatusModal()" class="text-xs uppercase tracking-widest text-yellow-300 font-bold hover:underline">Cek Pesanan</a></li>
+    <li><a href="#" onclick="openReservationModal()" class="nav-cta">Reservasi</a></li>
+    <li><a href="#" onclick="openAdminAuthModal()" class="text-xs uppercase tracking-widest text-[#E8B840] font-bold flex items-center gap-1 ml-4 hover:opacity-80 transition-opacity"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg><span>Admin</span></a></li>
+  </ul>
+  <!-- Mobile Menu Trigger -->
+  <div class="md:hidden flex items-center gap-2.5">
+    <button onclick="openOrderStatusModal()" class="px-3 py-1.5 bg-[#E8B840]/20 text-[#E8B840] border border-[#E8B840]/40 rounded-full text-xs font-bold shadow-sm">Pesanan</button>
+    <button onclick="toggleMobileSidebar(true)" class="p-2 text-white bg-black/40 rounded-full hover:bg-black/60 focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ═══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left reveal">
+    <div class="hero-eyebrow">Est. 2024 · Bandar Lampung</div>
+    <h1 class="hero-title">
+      Where Every<br>Sip Reaches<br>the <em>Sky.</em>
+    </h1>
+    <p class="hero-desc">Nikmati kopi premium dengan bahan pilihan terbaik, cita rasa autentik, dan suasana hangat yang selalu ingin kamu kembali.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-white">Lihat Menu</a>
+      <a href="#about" class="btn-ghost-white">Tentang Kami</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">32</span><span class="stat-label">Menu Pilihan</span></div>
+      <div><span class="stat-num">4.9★</span><span class="stat-label">Rating Bintang</span></div>
+      <div><span class="stat-num">2K+</span><span class="stat-label">Pelanggan Setia</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-stack reveal">
+      <img class="hero-img-main"
+           src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80"
+           alt="Kopi Sky Haus"
+           onerror="this.style.background='linear-gradient(135deg,#8B1525,#4A0A12)';this.src='./public/hero_coffee_splash.png'"/>
+      <img class="hero-img-small"
+           src="https://images.unsplash.com/photo-1621955964441-c173e01c135b?w=400&q=80"
+           alt="Pastry Sky Haus"
+           onerror="this.style.background='linear-gradient(135deg,#C4920A,#8B6500)';this.src='./public/menu_croissant.png'"/>
+      <div class="hero-float-badge">
+        <small>Best</small>
+        SELLER
+        <small>2024</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Signature Coffee</span>
+    <span class="ticker-item">Fresh Pastry</span>
+    <span class="ticker-item">Sky Haus Bandar Lampung</span>
+    <span class="ticker-item">Premium Single Origin</span>
+    <span class="ticker-item">Expert Baristas</span>
+    <span class="ticker-item">Cozy Atmosphere</span>
+    <span class="ticker-item">Open 07:00 – 23:00</span>
+    <span class="ticker-item">Signature Coffee</span>
+    <span class="ticker-item">Fresh Pastry</span>
+    <span class="ticker-item">Sky Haus Bandar Lampung</span>
+    <span class="ticker-item">Premium Single Origin</span>
+    <span class="ticker-item">Expert Baristas</span>
+    <span class="ticker-item">Cozy Atmosphere</span>
+    <span class="ticker-item">Open 07:00 – 23:00</span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ═══════════════════════════════════════ -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <img class="about-img-main"
+         src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=700&q=80"
+         alt="Suasana Sky Haus"
+         onerror="this.style.background='linear-gradient(135deg,#F4EDE4,#E8D5C0)'"/>
+    <img class="about-img-accent"
+         src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80"
+         alt="Kopi Latte Art"
+         onerror="this.style.background='#C4920A'"/>
+    <div class="about-badge-wrap">
+      <strong>5★</strong>
+      <small>Rating</small>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="eyebrow">Tentang Kami</div>
+    <h2 class="sec-title">More Than<br><em>Just Coffee.</em><br>It's an Experience.</h2>
+    <p>Sky Haus lahir dari passion mendalam terhadap kopi berkualitas tinggi dan kuliner premium. Setiap cangkir kopi adalah cerita — dari biji pilihan hingga tangan barista terampil kami.</p>
+    <p>Berlokasi di jantung Bandar Lampung, kami menawarkan suasana hangat, menu beragam, dan pengalaman yang selalu ingin kamu ulangi.</p>
+    <div class="about-features">
+      <div class="af"><div class="af-icon mb-2.5 text-[#C4920A]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><h4>Bahan Premium</h4><p>Kopi single origin & bahan lokal terpilih</p></div>
+      <div class="af"><div class="af-icon mb-2.5 text-[#C4920A]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></div><h4>Expert Baristas</h4><p>Terlatih & bersertifikat internasional</p></div>
+      <div class="af"><div class="af-icon mb-2.5 text-[#C4920A]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div><h4>Cozy Ambiance</h4><p>Ruang nyaman untuk kerja & bersantai</p></div>
+      <div class="af"><div class="af-icon mb-2.5 text-[#C4920A]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h4>Fast Service</h4><p>Pesananmu siap dalam hitungan menit</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MENU ════════════════════════════════════════ -->
+<section id="menu">
+  <div class="menu-head">
+    <div>
+      <div class="eyebrow">Our Menu</div>
+      <h2 class="sec-title">Fresh &amp; <em>Crafted</em><br>with Love.</h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab active" data-tab="drinks">Minuman (21)</button>
+      <button class="tab" data-tab="food">Makanan (11)</button>
+    </div>
+  </div>
+
+  <!-- ── DRINKS (21) ── -->
+  <div class="menu-grid" id="grid-drinks">
+
+    <!-- 1 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=500&q=80" alt="Espresso" onerror="this.style.background='#6B0F1A';this.src='./public/hero_coffee_splash.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Sky Haus Espresso</div>
+        <div class="mcard-desc">Espresso pekat dengan crema sempurna dari biji Arabika premium Lampung.</div>
+        <div class="mcard-foot"><div class="mcard-price">28K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80" alt="Latte" onerror="this.style.background='#8B1525';this.src='./public/menu_matcha_latte.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Cloud Nine Latte</div>
+        <div class="mcard-desc">Latte lembut dengan foam susu tebal dan sentuhan vanilla premium.</div>
+        <div class="mcard-foot"><div class="mcard-price">38K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=500&q=80" alt="Cappuccino" onerror="this.style.background='#A8253A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Golden Caramel Macchiato</div>
+        <div class="mcard-desc">Espresso berlapis karamel emas, foam susu, dan sedikit garam laut.</div>
+        <div class="mcard-foot"><div class="mcard-price">42K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&q=80" alt="Matcha" onerror="this.style.background='#6B0F1A';this.src='./public/menu_matcha_latte.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Matcha Sky Latte</div>
+        <div class="mcard-desc">Matcha ceremonial grade Jepang dengan susu oat dan honey drizzle.</div>
+        <div class="mcard-foot"><div class="mcard-price">40K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80" alt="Cold Brew" onerror="this.style.background='#4A0A12';this.src='./public/hero_coffee_splash.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Midnight Cold Brew</div>
+        <div class="mcard-desc">Cold brew 18 jam dengan black sugar syrup dan es batu kristal.</div>
+        <div class="mcard-foot"><div class="mcard-price">35K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=500&q=80" alt="Flat White" onerror="this.style.background='#8B1525';this.src='./public/menu_matcha_latte.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Hazelnut Sky Flat White</div>
+        <div class="mcard-desc">Double ristretto dengan susu segar dan hazelnut syrup artisan.</div>
+        <div class="mcard-foot"><div class="mcard-price">39K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&q=80" alt="Rose Cappuccino" onerror="this.style.background='#6B0F1A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Signature Coffee</div>
+        <div class="mcard-name">Rose Velvet Cappuccino</div>
+        <div class="mcard-desc">Cappuccino dengan infusi bunga mawar dan sentuhan dark chocolate.</div>
+        <div class="mcard-foot"><div class="mcard-price">45K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1620360289872-90bde9a7b498?w=500&q=80" alt="Blueberry Smoothie" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Non-Coffee</div>
+        <div class="mcard-name">Blueberry Bliss Smoothie</div>
+        <div class="mcard-desc">Blueberry segar, yogurt Greek, madu, dan susu almond diblend sempurna.</div>
+        <div class="mcard-foot"><div class="mcard-price">38K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=80" alt="Green Tea Latte" onerror="this.style.background='#6B0F1A';this.src='./public/menu_matcha_latte.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Non-Coffee</div>
+        <div class="mcard-name">Zen Green Tea Latte</div>
+        <div class="mcard-desc">Sencha Jepang premium dengan susu full cream dan oat milk foam.</div>
+        <div class="mcard-foot"><div class="mcard-price">37K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1497534446932-c925b458314e?w=500&q=80" alt="Strawberry" onerror="this.style.background='#8B1525';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Non-Coffee</div>
+        <div class="mcard-name">Strawberry Sunset</div>
+        <div class="mcard-desc">Jus stroberi segar dengan layer es krim vanilla dan granola renyah.</div>
+        <div class="mcard-foot"><div class="mcard-price">40K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=500&q=80" alt="Lemon Fizz" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Non-Coffee</div>
+        <div class="mcard-name">Citrus Lemon Fizz</div>
+        <div class="mcard-desc">Lemon segar, jahe madu, soda artisan, dan mint dingin yang menyegarkan.</div>
+        <div class="mcard-foot"><div class="mcard-price">32K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Ube Latte" onerror="this.style.background='#6B0F1A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Non-Coffee</div>
+        <div class="mcard-name">Ube Dreamer</div>
+        <div class="mcard-desc">Ube purple yam latte dengan susu oat, coconut cream, dan tapioca pearls.</div>
+        <div class="mcard-foot"><div class="mcard-price">43K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1546171753-97d7676e4602?w=500&q=80" alt="Mojito" onerror="this.style.background='#8B1525';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Mocktail</div>
+        <div class="mcard-name">Ocean Breeze Mojito</div>
+        <div class="mcard-desc">Mint segar, soda, lime, blue curacao syrup tanpa alkohol dan es remuk.</div>
+        <div class="mcard-foot"><div class="mcard-price">36K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=500&q=80" alt="Mango Tango" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Mocktail</div>
+        <div class="mcard-name">Tropical Mango Tango</div>
+        <div class="mcard-desc">Mango Harum Manis Lampung, passion fruit, dan coconut water segar.</div>
+        <div class="mcard-foot"><div class="mcard-price">38K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=500&q=80" alt="Cucumber Cooler" onerror="this.style.background='#6B0F1A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Mocktail</div>
+        <div class="mcard-name">Cucumber Mint Cooler</div>
+        <div class="mcard-desc">Timun segar, mint, lime squeeze, soda premium dan es batu kristal.</div>
+        <div class="mcard-foot"><div class="mcard-price">33K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&q=80" alt="Chai Latte" onerror="this.style.background='#8B1525';this.src='./public/menu_matcha_latte.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Hot Drinks</div>
+        <div class="mcard-name">Spiced Chai Latte</div>
+        <div class="mcard-desc">Teh chai kaya rempah (kayu manis, cardamom, jahe) dengan susu steamed.</div>
+        <div class="mcard-foot"><div class="mcard-price">34K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=500&q=80" alt="Dark Choco" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Hot Drinks</div>
+        <div class="mcard-name">Dark Choco Velvet</div>
+        <div class="mcard-desc">Dark chocolate Belgia 72% dilebur dengan susu segar dan whipped cream.</div>
+        <div class="mcard-foot"><div class="mcard-price">36K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=500&q=80" alt="Sakura Tea" onerror="this.style.background='#6B0F1A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Hot Drinks</div>
+        <div class="mcard-name">Sakura Honey Tea</div>
+        <div class="mcard-desc">Teh putih premium dengan kelopak sakura, madu hutan, dan lemon slice.</div>
+        <div class="mcard-foot"><div class="mcard-price">32K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 19 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=500&q=80" alt="Frappuccino" onerror="this.style.background='#8B1525';this.src='./public/hero_coffee_splash.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frappe</div>
+        <div class="mcard-name">Sky Haus Frappuccino</div>
+        <div class="mcard-desc">Espresso blended dengan es, susu, karamel, dan whipped cream berlapis.</div>
+        <div class="mcard-foot"><div class="mcard-price">45K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=500&q=80" alt="Cotton Candy Frappe" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frappe</div>
+        <div class="mcard-name">Cotton Candy Dream</div>
+        <div class="mcard-desc">Frappe vanilla dengan candy floss syrup dan cotton candy garnish.</div>
+        <div class="mcard-foot"><div class="mcard-price">43K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1567306301408-9b74779a11af?w=500&q=80" alt="Grape Frappe" onerror="this.style.background='#6B0F1A';this.src='./public/menu_sunset_mocktail.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frappe</div>
+        <div class="mcard-name">Grape Storm Frappe</div>
+        <div class="mcard-desc">Anggur segar diblend dengan vanilla ice cream dan whipped cream tebal.</div>
+        <div class="mcard-foot"><div class="mcard-price">44K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+  </div><!-- /drinks -->
+
+  <!-- ── FOOD (11) ── -->
+  <div class="menu-grid hidden" id="grid-food">
+
+    <!-- F1 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80" alt="Croissant" onerror="this.style.background='#C4920A';this.src='./public/menu_croissant.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pastry</div>
+        <div class="mcard-name">Butter Croissant Sky</div>
+        <div class="mcard-desc">Croissant all-butter berlapis mengkilap dengan isian cream cheese premium.</div>
+        <div class="mcard-foot"><div class="mcard-price">32K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F2 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1541519227354-08fa5d50c820?w=500&q=80" alt="Avocado Toast" onerror="this.style.background='#6B0F1A';this.src='./public/menu_wagyu_sando.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Breakfast</div>
+        <div class="mcard-name">Avocado Toast Deluxe</div>
+        <div class="mcard-desc">Sourdough panggang, avocado spread, telur poached, feta, dan chili flakes.</div>
+        <div class="mcard-foot"><div class="mcard-price">55K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F3 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1565299543923-37dd37887442?w=500&q=80" alt="Pancake" onerror="this.style.background='#8B1525';this.src='./public/menu_red_velvet.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Breakfast</div>
+        <div class="mcard-name">Japanese Pancake Tower</div>
+        <div class="mcard-desc">Fluffy souffle pancake bertumpuk dengan maple syrup, butter, dan strawberry segar.</div>
+        <div class="mcard-foot"><div class="mcard-price">62K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F4 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Cheesecake" onerror="this.style.background='#4A0A12';this.src='./public/menu_red_velvet.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Dessert</div>
+        <div class="mcard-name">Ube Cheesecake Slice</div>
+        <div class="mcard-desc">Cheesecake ube Filipina dengan graham cracker crust dan coconut glaze.</div>
+        <div class="mcard-foot"><div class="mcard-price">48K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F5 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&q=80" alt="Cookie" onerror="this.style.background='#6B0F1A';this.src='./public/menu_croissant.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pastry</div>
+        <div class="mcard-name">Choco Lava Cookie</div>
+        <div class="mcard-desc">Cookies premium dengan isian dark chocolate cair hangat, ditaburi sea salt.</div>
+        <div class="mcard-foot"><div class="mcard-price">28K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F6 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80" alt="Salad" onerror="this.style.background='#8B1525';this.src='./public/menu_wagyu_sando.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Light Meal</div>
+        <div class="mcard-name">Sky Garden Salad</div>
+        <div class="mcard-desc">Mixed greens, quinoa, edamame, cherry tomato, parmesan, lemon vinaigrette.</div>
+        <div class="mcard-foot"><div class="mcard-price">52K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F7 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=80" alt="Panini" onerror="this.style.background='#4A0A12';this.src='./public/menu_wagyu_sando.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Sandwich</div>
+        <div class="mcard-name">Tuna Melt Panini</div>
+        <div class="mcard-desc">Tuna albacore, mozzarella, olives, dan tomat sundried dalam ciabatta hangat.</div>
+        <div class="mcard-foot"><div class="mcard-price">50K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F8 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1514910657153-6c079fb2e739?w=500&q=80" alt="Club Sandwich" onerror="this.style.background='#6B0F1A';this.src='./public/menu_wagyu_sando.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Sandwich</div>
+        <div class="mcard-name">Sky Club Sandwich</div>
+        <div class="mcard-desc">Roti brioche panggang, ayam smoked, egg, lettuce, tomat, dan aioli truffle.</div>
+        <div class="mcard-foot"><div class="mcard-price">58K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F9 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=500&q=80" alt="Cupcake" onerror="this.style.background='#8B1525';this.src='./public/menu_red_velvet.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Dessert</div>
+        <div class="mcard-name">Salted Caramel Cupcake</div>
+        <div class="mcard-desc">Cupcake vanilla moist dengan frosting salted caramel swiss meringue buttercream.</div>
+        <div class="mcard-foot"><div class="mcard-price">30K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F10 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&q=80" alt="Pizza" onerror="this.style.background='#4A0A12';this.src='./public/menu_wagyu_sando.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Light Meal</div>
+        <div class="mcard-name">Mini Margherita Pizza</div>
+        <div class="mcard-desc">Pizza personal saus tomat san marzano, mozzarella, dan basil segar.</div>
+        <div class="mcard-foot"><div class="mcard-price">55K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+    <!-- F11 -->
+    <div class="mcard reveal">
+      <img class="mcard-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="Tiramisu" onerror="this.style.background='#6B0F1A';this.src='./public/menu_red_velvet.png'"/>
+      <div class="mcard-body">
+        <div class="mcard-cat">Dessert</div>
+        <div class="mcard-name">Tiramisu Sky Jar</div>
+        <div class="mcard-desc">Tiramisu klasik dalam jar dengan ladyfinger espresso-soaked dan mascarpone tebal.</div>
+        <div class="mcard-foot"><div class="mcard-price">42K<small>IDR</small></div><button class="mcard-add">+</button></div>
+      </div>
+    </div>
+
+  </div><!-- /food -->
+</section>
+
+<!-- ══ FEATURED ════════════════════════════════════ -->
+<section id="featured">
+  <div class="feat-inner">
+    <div class="feat-text reveal">
+      <div class="eyebrow on-dark">Best Seller</div>
+      <h2 class="sec-title on-dark">Our Freshly<br><em>Brewed</em><br>Coffees.</h2>
+      <p>Pilihan terbaik dari para pelanggan setia Sky Haus. Dibuat dengan keahlian dan passion setiap harinya.</p>
+      <div class="c-nav">
+        <button class="c-btn" id="prev">←</button>
+        <button class="c-btn" id="next">→</button>
+      </div>
+    </div>
+    <div class="carousel-wrap reveal">
+      <div class="c-track" id="c-track">
+        <div class="c-item mcard cursor-pointer">
+          <img class="c-img mcard-img" src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80" alt="Espresso" onerror="this.style.background='#6B0F1A';this.src='./public/hero_coffee_splash.png'"/>
+          <div class="c-body"><div class="mcard-cat hidden">Signature Coffee</div><h3 class="mcard-name">Sky Haus Espresso</h3><p class="mcard-desc">Arabika premium dengan crema sempurna</p><div class="c-price mcard-price">28K IDR</div></div>
+        </div>
+        <div class="c-item mcard cursor-pointer">
+          <img class="c-img mcard-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80" alt="Latte" onerror="this.style.background='#8B1525';this.src='./public/menu_matcha_latte.png'"/>
+          <div class="c-body"><div class="mcard-cat hidden">Signature Coffee</div><h3 class="mcard-name">Cloud Nine Latte</h3><p class="mcard-desc">Foam susu tebal dengan vanilla premium</p><div class="c-price mcard-price">38K IDR</div></div>
+        </div>
+        <div class="c-item mcard cursor-pointer">
+          <img class="c-img mcard-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80" alt="Caramel" onerror="this.style.background='#4A0A12';this.src='./public/menu_sunset_mocktail.png'"/>
+          <div class="c-body"><div class="mcard-cat hidden">Signature Coffee</div><h3 class="mcard-name">Golden Caramel Macchiato</h3><p class="mcard-desc">Karamel emas, foam, dan garam laut</p><div class="c-price mcard-price">42K IDR</div></div>
+        </div>
+        <div class="c-item mcard cursor-pointer">
+          <img class="c-img mcard-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="Cold Brew" onerror="this.style.background='#6B0F1A';this.src='./public/hero_coffee_splash.png'"/>
+          <div class="c-body"><div class="mcard-cat hidden">Signature Coffee</div><h3 class="mcard-name">Midnight Cold Brew</h3><p class="mcard-desc">Cold brew 18 jam ekstra strong</p><div class="c-price mcard-price">35K IDR</div></div>
+        </div>
+        <div class="c-item mcard cursor-pointer">
+          <img class="c-img mcard-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" alt="Matcha" onerror="this.style.background='#8B1525';this.src='./public/menu_matcha_latte.png'"/>
+          <div class="c-body"><div class="mcard-cat hidden">Signature Coffee</div><h3 class="mcard-name">Matcha Sky Latte</h3><p class="mcard-desc">Matcha ceremonial grade Jepang</p><div class="c-price mcard-price">40K IDR</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ════════════════════════════════ -->
+<section id="testimonials">
+  <div class="testi-head">
+    <div class="eyebrow" style="justify-content:center">Ulasan Pelanggan</div>
+    <h2 class="sec-title">What They <em>Say</em><br>About Us.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Cloud Nine Latte di Sky Haus adalah yang terbaik yang pernah saya coba di Lampung. Suasananya juga sangat nyaman untuk bekerja!"</div>
+      <div class="tcard-author">
+        <img class="tcard-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sari" onerror="this.style.background='#6B0F1A';this.src=''"/>
+        <div><div class="tcard-name">Sari Dewi</div><div class="tcard-role">Content Creator, Bandar Lampung</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Tiramisu Sky Jar-nya luar biasa! Kopi espressonya benar-benar terasa meresap sempurna. Wajib coba untuk pecinta dessert."</div>
+      <div class="tcard-author">
+        <img class="tcard-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Budi" onerror="this.style.background='#8B1525';this.src=''"/>
+        <div><div class="tcard-name">Budi Santoso</div><div class="tcard-role">Software Engineer</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Tempat meeting favorit! WiFi kencang, kopi enak, Japanese Pancake Tower-nya bikin nagih. 10/10 recommended!"</div>
+      <div class="tcard-author">
+        <img class="tcard-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Rina" onerror="this.style.background='#4A0A12';this.src=''"/>
+        <div><div class="tcard-name">Rina Putri</div><div class="tcard-role">Business Owner</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ═════════════════════════════════════════ -->
+<div id="cta">
+  <h2>Ready to Experience<br><em>Sky Haus?</em></h2>
+  <a href="#menu" class="btn-white">Pesan Sekarang →</a>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════ -->
+<footer id="footer">
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">SKY<span>HAUS</span></div>
+      <div class="foot-tagline">Premium cafe experience di jantung Bandar Lampung. Kopi terbaik, suasana terhangat, kenangan tak terlupakan.</div>
+      <div class="socials">
+        <a href="#" class="soc font-bold text-xs">IG</a>
+        <a href="#" class="soc font-bold text-xs">X</a>
+        <a href="#" class="soc font-bold text-xs">FB</a>
+        <a href="#" class="soc font-bold text-xs">YT</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Menu</h4>
+      <ul>
+        <li>Signature Coffee</li><li>Non-Coffee</li>
+        <li>Mocktail</li><li>Hot Drinks</li>
+        <li>Frappe</li><li>Makanan</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Info</h4>
+      <ul>
+        <li>Tentang Kami</li><li>Reservasi</li>
+        <li>Galeri</li><li>Blog</li><li>Karir</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Kontak</h4>
+      <ul>
+        <li>📍 Jl. Sky Raya No.1, Bandar Lampung</li>
+        <li>📞 (0721) 123-4567</li>
+        <li>📧 hello@skyhausid.com</li>
+        <li>🕐 07:00 – 23:00 setiap hari</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2026 Sky Haus Cafe. All rights reserved.</p>
+    <p>Made with ☕ in Bandar Lampung</p>
+  </div>
+</footer>
+
+<!-- ══ OVERLAYS & MODALS ═══════════════════════════ -->
+
+<!-- Checkout & Pairing Modal Overlay -->
+<div id="modal-overlay" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity animate-fade-in font-sans">
+  <div id="checkout-modal-content" class="relative w-full max-w-xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto animate-modal text-gray-900">
+    <!-- Dynamic Content Rendered by app.js -->
+  </div>
+</div>
+
+<!-- QRIS Payment Modal Overlay -->
+<div id="qris-overlay" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity animate-fade-in font-sans">
+  <div id="qris-modal-content" class="relative bg-white w-full max-w-sm rounded-[2.5rem] p-8 flex flex-col items-center text-center animate-modal shadow-2xl border border-gray-100 text-gray-900">
+    <!-- Dynamic Content Rendered by app.js -->
+  </div>
+</div>
+
+<!-- Reservation Modal Overlay -->
+<div id="reservation-overlay" class="hidden fixed inset-0 z-[75] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
+  <div id="reservation-modal-content" class="relative w-full max-w-md bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden animate-modal border border-gray-100 text-gray-900">
+    <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors p-1">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold font-syne text-gray-900 mb-1">Book a Table</h3>
+      <p class="text-xs text-maroon font-semibold uppercase tracking-widest">Premium Dining & Workspace</p>
+    </div>
+    <form onsubmit="handleReservation(event)" class="space-y-4">
+      <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-1.5 text-left">Your Full Name</label>
+        <input type="text" id="res-name" required placeholder="Enter your name" class="w-full px-4 py-3 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 text-sm font-medium" />
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-1.5 text-left">Number of Guests</label>
+        <select id="res-guests" class="w-full px-4 py-3 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 text-sm font-medium">
+          <option value="1">1 Person (Solo Workspace)</option>
+          <option value="2" selected>2 People (Couple / Meeting)</option>
+          <option value="4">4 People (Group / Family)</option>
+          <option value="6">6 People (Conference / Lounge)</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-1.5 text-left">Reservation Date</label>
+        <input type="date" id="res-date" required value="2026-05-18" class="w-full px-4 py-3 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 text-sm font-medium" />
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-1.5 text-left">Arrival Time</label>
+        <input type="time" id="res-time" required value="19:00" class="w-full px-4 py-3 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 text-sm font-medium" />
+      </div>
+      <button type="submit" class="w-full py-4 bg-maroon text-white rounded-xl font-bold uppercase tracking-widest hover:bg-[#4A0A12] transition-all shadow-lg mt-6 font-syne">
+        Confirm Reservation
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Portal Overlay -->
+<div id="admin-overlay" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
+  <div id="admin-modal-content" class="relative w-full max-w-4xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
+    <!-- Dynamic Content Rendered by app.js -->
+  </div>
+</div>
+
+<!-- Mobile Sidebar Overlay -->
+<div id="sidebar-overlay" class="hidden fixed inset-0 z-[550] bg-black/60 backdrop-blur-sm transition-opacity animate-fade-in" onclick="toggleMobileSidebar(false)"></div>
+<div id="mobile-sidebar" class="fixed top-0 right-0 bottom-0 w-80 bg-[#4A0A12] text-white z-[600] transform translate-x-full transition-transform duration-300 ease-in-out p-8 shadow-2xl flex flex-col justify-between font-sans">
+  <div>
+    <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
+      <span class="font-syne font-black text-2xl tracking-widest text-[#E8B840]">SKY<span class="text-white">HAUS</span></span>
+      <button onclick="toggleMobileSidebar(false)" class="p-2 text-white/70 hover:text-white focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    </div>
+    <ul class="space-y-6 text-sm font-bold tracking-widest uppercase">
+      <li><a href="#about" onclick="toggleMobileSidebar(false)" class="hover:text-[#E8B840] transition-colors block py-1">Tentang</a></li>
+      <li><a href="#menu" onclick="toggleMobileSidebar(false)" class="hover:text-[#E8B840] transition-colors block py-1">Menu</a></li>
+      <li><a href="#featured" onclick="toggleMobileSidebar(false)" class="hover:text-[#E8B840] transition-colors block py-1">Best Seller</a></li>
+      <li><a href="#testimonials" onclick="toggleMobileSidebar(false)" class="hover:text-[#E8B840] transition-colors block py-1">Ulasan</a></li>
+      <li><a href="#" onclick="toggleMobileSidebar(false); openReservationModal()" class="text-[#E8B840] block py-1">Reservasi Meja</a></li>
+      <li><a href="#" onclick="toggleMobileSidebar(false); openOrderStatusModal()" class="text-yellow-300 block py-1">Cek Status Pesanan</a></li>
+      <li><a href="#" onclick="toggleMobileSidebar(false); openAdminAuthModal()" class="text-gray-300 hover:text-white flex items-center gap-2 pt-6 border-t border-white/10"><svg class="w-4 h-4 text-[#E8B840]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg><span>Manajemen Admin</span></a></li>
+    </ul>
+  </div>
+  <div class="pt-6 border-t border-white/10 text-xs text-white/40">
+    <p>© 2026 Sky Haus Cafe.</p>
+  </div>
+</div>
+
+<!-- Order Status Checker Overlay -->
+<div id="status-overlay" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-fade-in font-sans">
+  <div id="status-modal-content" class="relative w-full max-w-xl bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col animate-modal border border-gray-100 text-gray-900 font-sans">
+    <!-- Dynamic Content Rendered by app.js -->
+  </div>
+</div>
+
+<!-- Payment Proof Viewer Overlay -->
+<div id="proof-overlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity animate-fade-in font-sans" onclick="closeProofModal()">
+  <div class="relative max-w-2xl w-full bg-white rounded-[2.5rem] p-6 md:p-8 shadow-2xl overflow-hidden flex flex-col items-center animate-modal border border-gray-100" onclick="event.stopPropagation()">
+    <div class="flex justify-between items-center w-full mb-4 border-b border-gray-100 pb-4 text-left">
+      <div>
+        <h3 class="text-2xl font-bold font-syne text-gray-900 mb-1">Bukti Pembayaran QRIS</h3>
+        <p id="proof-order-id" class="text-xs text-maroon font-bold font-mono uppercase tracking-wider"></p>
+      </div>
+      <button onclick="closeProofModal()" class="p-1 text-gray-400 hover:text-gray-900 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    </div>
+    <div class="w-full max-h-[65vh] overflow-auto flex items-center justify-center bg-gray-50 rounded-2xl p-4 border border-gray-200 shadow-inner">
+      <img id="proof-image-view" class="max-w-full max-h-[55vh] object-contain rounded-xl shadow-sm" src="" alt="Bukti Pembayaran" />
+    </div>
+    <div class="mt-6 w-full flex justify-end gap-3 font-syne">
+      <button onclick="closeProofModal()" class="px-6 py-3 bg-gray-900 text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-black transition-all shadow-md">Tutup Jendela</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

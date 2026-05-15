@@ -1,37 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SKY HAUSSS • Premium Café (Zero-RAM Static Architecture)
 
-## Getting Started
+An Awwwards-inspired, ultra-lightweight web application designed for absolute premium aesthetics, instant responsiveness, and zero server overhead.
 
-First, run the development server:
+## ✨ Why this Refactor?
+Previously, running Node/NPM dev servers caused memory exhaustion and laptop crashes. We have completely reimagined and rebuilt SKY HAUSSS into pure **HTML5, Vanilla CSS, and Vanilla JS** with zero build tools or server dependencies required.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 How to Run (Zero RAM Overhead)
+1. Simply double-click and open `index.html` in any web browser (Chrome, Safari, Firefox, Edge).
+2. **No terminal commands needed! No `npm run dev`! No server crashes!**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# cafe-skyhauss
+## 🌟 Key Features
+- **Zero-RAM Recommendation Algorithm**: A dynamic, in-memory scoring engine that pairs foods with complementary beverages based on taste profile tags (sweet, savory, bold, milk, refresher). The more items you select, the smarter the pairing suggestions!
+- **11 Makanan & 21 Minuman**: Exactly 11 premium culinary dishes and 21 exquisite signature coffees, teas, and refreshers.
+- **Flawless Mobile Responsiveness & Sidebar**: On handheld devices, a beautiful slide-in hamburger sidebar provides seamless access to all sections and status trackers.
+- **Real-Time Order Tracking & Bukti Transfer**: Customers can upload proof of payment screenshots and track their orders instantly (`Pending / On Progress` vs `Selesai / Siap Diambil`).
+- **Live Operational Admin Portal (PIN Protected)**: Secured with a 6-digit PIN (`123456`), cafe managers can view customer orders, inspect payment receipt proofs in high resolution, manage table reservations, and monitor inventory in real-time.
+- **Professional Premium Design**: Sleek typography (`Cormorant Garamond`, `Outfit`, `Bebas Neue`, `Syne`), maroon & gold palette (`#6B0F1A`, `#C4920A`), and custom SVG iconography.
