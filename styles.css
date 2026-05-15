@@ -728,3 +728,87 @@ footer {
   .nav-links { display: none; }
   section { padding: 4.5rem 6vw; }
 }
+
+@media (max-width: 768px) {
+  html, body { width: 100%; overflow-x: hidden; }
+  section { padding: 3.5rem 1.25rem !important; width: 100%; }
+  nav { padding: 1rem 1.25rem; }
+  
+  #hero .hero-left { padding: 7rem 1.25rem 4rem !important; }
+  .hero-title { font-size: 2.8rem !important; line-height: 1.05 !important; }
+  .hero-stats { gap: 1rem !important; flex-wrap: wrap; }
+  
+  .sec-title { font-size: 2rem !important; line-height: 1.1 !important; }
+  
+  /* Menu Mobile List Layout with Image */
+  .menu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .mcard {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0.75rem !important;
+    gap: 1rem !important;
+    border-radius: 1rem !important;
+    height: auto !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  .mcard-img {
+    width: 85px !important;
+    height: 85px !important;
+    aspect-ratio: 1 !important;
+    flex-shrink: 0 !important;
+    border-radius: 0.75rem !important;
+    object-fit: cover !important;
+  }
+  .mcard-body {
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex-grow: 1 !important;
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+  .mcard-cat {
+    font-size: 0.6rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+  .mcard-name {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.25rem !important;
+    white-space: normal !important;
+  }
+  .mcard-desc {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.4 !important;
+  }
+  .mcard-foot {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+  }
+  .mcard-price {
+    font-size: 1.15rem !important;
+  }
+  .mcard-add {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.25rem !important;
+    flex-shrink: 0 !important;
+    margin-left: 0.5rem !important;
+  }
+  
+  #cta h2 { font-size: 1.75rem !important; }
+  .foot-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
