@@ -56,10 +56,12 @@ function toggleMobileSidebar(show) {
   if (!sidebar || !overlay) return;
 
   if (show) {
+    lockBodyScroll();
     overlay.classList.remove('hidden');
     sidebar.classList.remove('translate-x-full');
     sidebar.classList.add('translate-x-0');
   } else {
+    unlockBodyScroll();
     overlay.classList.add('hidden');
     sidebar.classList.remove('translate-x-0');
     sidebar.classList.add('translate-x-full');
@@ -249,6 +251,16 @@ function getRecommendations(baseItem, currentCombos = []) {
 
 // --- Modal Management & Checkout Flow ---
 
+function lockBodyScroll() {
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+}
+
+function unlockBodyScroll() {
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+}
+
 function closeModal() {
   ['modal-overlay', 'qris-overlay', 'reservation-overlay', 'admin-overlay', 'status-overlay', 'proof-overlay'].forEach(id => {
     const el = document.getElementById(id);
@@ -256,6 +268,7 @@ function closeModal() {
   });
   selectedMainItem = null;
   currentComboItems = [];
+  unlockBodyScroll();
 }
 
 function setupModalListeners() {
@@ -274,7 +287,10 @@ function openCheckoutModal(item) {
   currentComboItems = [];
   renderCheckoutModal();
   const modalOverlay = document.getElementById('modal-overlay');
-  if (modalOverlay) modalOverlay.classList.remove('hidden');
+  if (modalOverlay) {
+    lockBodyScroll();
+    modalOverlay.classList.remove('hidden');
+  }
 }
 
 function addComboItem(itemId) {
@@ -418,6 +434,7 @@ function handleConfirmOrder(e) {
 
   document.getElementById('modal-overlay').classList.add('hidden');
   renderQrisModal();
+  lockBodyScroll();
   document.getElementById('qris-overlay').classList.remove('hidden');
 }
 
@@ -613,6 +630,7 @@ function openOrderStatusModal() {
       </button>
     </div>
   `;
+  lockBodyScroll();
   overlay.classList.remove('hidden');
 }
 
@@ -629,12 +647,14 @@ function openProofModal(orderId) {
 
   imgView.src = order.proof || './public/hero_coffee_splash.png';
   idText.textContent = `Order ID: ${order.id} (${order.customer})`;
+  lockBodyScroll();
   overlay.classList.remove('hidden');
 }
 
 function closeProofModal() {
   const overlay = document.getElementById('proof-overlay');
   if (overlay) overlay.classList.add('hidden');
+  unlockBodyScroll();
 }
 
 // --- Reservation Booking ---
@@ -642,7 +662,10 @@ function closeProofModal() {
 function openReservationModal() {
   closeModal();
   const modal = document.getElementById('reservation-overlay');
-  if (modal) modal.classList.remove('hidden');
+  if (modal) {
+    lockBodyScroll();
+    modal.classList.remove('hidden');
+  }
 }
 
 function handleReservation(e) {
@@ -692,7 +715,10 @@ function initAdminStorage() {
 function openAdminAuthModal() {
   closeModal();
   const overlay = document.getElementById('admin-overlay');
-  if (overlay) overlay.classList.remove('hidden');
+  if (overlay) {
+    lockBodyScroll();
+    overlay.classList.remove('hidden');
+  }
 
   if (isAdminLoggedIn) {
     renderAdminDashboard();
