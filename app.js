@@ -394,29 +394,29 @@ function renderCheckoutModal() {
     ${comboHtml}
     ${recsHtml}
 
-    <form id="pickup-form" onsubmit="handleConfirmOrder(event)" class="space-y-5 mt-8 pt-6 border-t border-gray-100 font-sans">
+    <form id="pickup-form" onsubmit="handleConfirmOrder(event)" class="space-y-3 mt-4 pt-4 border-t border-gray-100 font-sans pb-2">
       <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-2 text-left">Your Full Name</label>
-        <input type="text" id="cust-name" required value="${orderCustomerData.name}" placeholder="Enter your name" class="w-full px-4 py-3.5 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 font-medium text-sm" />
+        <label class="block text-[11px] uppercase tracking-wider font-bold text-gray-500 mb-1 text-left">Your Full Name</label>
+        <input type="text" id="cust-name" required value="${orderCustomerData.name}" placeholder="Enter your name" class="w-full px-3.5 py-2.5 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 font-medium text-xs" />
       </div>
       <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-gray-500 mb-2 text-left">Self Pick-up Time</label>
-        <input type="time" id="cust-time" required value="${orderCustomerData.time || '15:00'}" class="w-full px-4 py-3.5 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 font-medium text-sm" />
-        <p class="text-xs text-gray-400 mt-1.5 font-light text-left">Your order will be fresh and waiting at the pickup counter.</p>
+        <label class="block text-[11px] uppercase tracking-wider font-bold text-gray-500 mb-1 text-left">Self Pick-up Time</label>
+        <input type="time" id="cust-time" required value="${orderCustomerData.time || '15:00'}" class="w-full px-3.5 py-2.5 bg-off-white rounded-xl focus:ring-2 focus:ring-maroon outline-none transition-all text-gray-900 border border-gray-200 font-medium text-xs" />
+        <p class="text-[10px] text-gray-400 mt-1 font-light text-left">Freshly prepared and waiting at the pickup counter.</p>
       </div>
 
-      <div class="pt-4 border-t border-gray-100 flex justify-between items-center mb-6">
-        <span class="text-sm font-bold text-gray-500 uppercase tracking-widest">Total Pay</span>
-        <span class="text-2xl font-black text-maroon font-syne">${totalFormatted}</span>
+      <div class="pt-3 border-t border-gray-100 flex justify-between items-center mb-3">
+        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Total Pay</span>
+        <span class="text-xl sm:text-2xl font-black text-maroon font-syne">${totalFormatted}</span>
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-3">
-        <button type="button" onclick="closeModal()" class="w-full sm:w-1/3 py-3.5 bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 rounded-xl font-bold uppercase tracking-wider transition-all font-syne text-xs border border-gray-200 shadow-sm flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <div class="grid grid-cols-2 gap-2.5 pt-1">
+        <button type="button" onclick="closeModal()" class="cursor-pointer active:scale-95 py-3 bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 rounded-xl font-bold uppercase tracking-wider transition-all font-syne text-xs border border-gray-200 shadow-2xs flex items-center justify-center gap-1.5">
+          <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
           <span>Batalkan</span>
         </button>
-        <button type="submit" class="w-full sm:w-2/3 py-4 bg-maroon text-white rounded-xl font-bold uppercase tracking-widest hover:bg-[#4A0A12] transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg font-syne text-xs sm:text-sm flex items-center justify-center gap-2">
-          <span>Lanjut Bayar QRIS →</span>
+        <button type="submit" class="cursor-pointer active:scale-95 py-3 bg-maroon text-white rounded-xl font-bold uppercase tracking-widest hover:bg-[#4A0A12] transition-all shadow-md font-syne text-xs flex items-center justify-center gap-1">
+          <span>Bayar QRIS →</span>
         </button>
       </div>
     </form>
@@ -503,14 +503,13 @@ function renderQrisModal() {
       </div>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-3 w-full mt-2">
-      <button onclick="confirmPayment()" class="w-full sm:w-2/3 py-4 bg-gray-900 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-black transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg font-syne text-xs sm:text-sm flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-        <span>Saya Sudah Transfer</span>
-      </button>
-      <button onclick="closeModal()" class="w-full sm:w-1/3 py-3.5 bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 rounded-xl font-bold uppercase tracking-wider transition-all font-syne text-xs border border-gray-200 shadow-sm flex items-center justify-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div class="grid grid-cols-2 gap-2.5 w-full mt-2 pb-1">
+      <button onclick="closeModal()" class="cursor-pointer active:scale-95 py-3 bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-700 rounded-xl font-bold uppercase tracking-wider transition-all font-syne text-xs border border-gray-200 shadow-2xs flex items-center justify-center gap-1.5">
+        <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
         <span>Batal Bayar</span>
+      </button>
+      <button onclick="confirmPayment()" class="cursor-pointer active:scale-95 py-3 bg-gray-900 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-black transition-all shadow-md font-syne text-xs flex items-center justify-center gap-1.5">
+        <span>Sudah Transfer</span>
       </button>
     </div>
   `;
